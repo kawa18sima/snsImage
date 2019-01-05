@@ -49,3 +49,12 @@ configuration relevant for your application.
 The app skeleton uses a subset of [Foundation](http://foundation.zurb.com/) (v5) CSS
 framework by default. You can, however, replace it with any other library or
 custom styles.
+
+# Table design
+## users table
+| Field|Type|Null|Key|Default|Extra|
+|:-----------:|:------------:|:------------:|:------------:|:------------:|:------------:|
+|id|INT|NO|PRIMARY|-|AUTO_INCREMENT|
+|name|VARCHAR(255)|NO|-|-|-|
+|email|VARCHAR(255)|NO|-|-|UNIQUE|
+|password|VARCHAR(255)|NO|-|-|-|

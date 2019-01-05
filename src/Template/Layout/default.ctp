@@ -40,10 +40,15 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <h1><a href=""><?= $this->fetch('title') ?></a></h1>
             </li>
         </ul>
+        
         <div class="top-bar-section">
             <ul class="right">
-                <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
+                <?php if(isset($login_user)): ?>
+                    <li><?=$this->Html->link('ログアウト',['controller' => 'Users', 'action' => 'logout'])?></li>
+                <?php else: ?>
+                    <li><?=$this->Html->link('ログイン',['controller' => 'Users', 'action' => 'login'])?></li>
+                    <li><?=$this->Html->link('新規登録',['controller' => 'Users', 'action' => 'signup'])?></li>
+                <?php endif ?>
             </ul>
         </div>
     </nav>
