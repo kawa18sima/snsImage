@@ -28,6 +28,7 @@ class CreateUsers extends AbstractMigration
             'limit' => 255,
             'null' => false,
         ]);
+        $table->addIndex(['email'],['unique' => true]);
         $table->create();
     }
 }
