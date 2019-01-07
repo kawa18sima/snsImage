@@ -12,6 +12,7 @@ class TwitterController extends AppController
     public function beforeFilter(Event $event){
         $this->autoRender = false;
     }
+    
     public function callback(){
         if($this->Twitter->initializeOnCallback()){
             $this->Flash->success(__('認証に成功しました。'));
@@ -30,13 +31,5 @@ class TwitterController extends AppController
                 return $this->redirect($this->Twitter->getAuthenticateUrl());
             }
         }
-    }
-
-    public function logout(){    
-        if ($this->request->is('get')){
-            $this->Twitter->clearSessionData();
-            $this->Flash->success(__('認証を解除しました。'));
-        }
-        return $this->redirect(['controller' => 'users', 'action' => 'index']);
     }
 }

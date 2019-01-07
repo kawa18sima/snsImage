@@ -31,7 +31,7 @@
                 <?php if(!$twitter_login): ?>
                     <?= $this->Html->link(__('ツイッターでログインする'), ['controller' => 'twitter' ,'action' => 'login']) ?>
                 <?php else: ?>
-                    <?= $this->Html->link(__('認証を解除する'), ['controller' => 'twitter' ,'action' => 'logout']) ?>
+                    <h5>認証されています</h5>
                 <?php endif ?>
             </td>
         </tr>

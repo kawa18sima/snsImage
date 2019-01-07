@@ -6,12 +6,13 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 use Cake\Network\Exception\InternalErrorException;
 
-define('CK_KEY', env('TWITTER_CONSUMER_API_KEY'));
-define('SK_KEY', env('TWITTER_CONSUMER_SECRET_KEY'));
-
 class TwitterComponent extends Component {
-    const TWITTER_CK = CK_KEY;
-    const TWITTER_CS = SK_KEY;
+    /** 
+     * TWITTER_CK -> Consumer API keys
+     * TWITTER_CS -> Consumer API secret key
+    */
+    const TWITTER_CK = '';
+    const TWITTER_CS = '';
     const CALLBACK_URL = 'https://d1wlktsquz20pl.cloudfront.net/twitter/collback';
 
     public function initialize(array $config) {
