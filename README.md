@@ -58,3 +58,13 @@ custom styles.
 |name|VARCHAR(255)|NO|-|-|-|
 |email|VARCHAR(255)|NO|-|-|UNIQUE|
 |password|VARCHAR(255)|NO|-|-|-|
+
+## images table
+
+| Field|Type|Null|Key|Default|Extra|
+|:-----------:|:------------:|:------------:|:------------:|:------------:|:------------:|
+|id|INT|NO|PRIMARY|-|AUTO_INCREMENT|
+|image_src|VARCHAR(255)|NO|-|-|-|
+|upload_time|TIMESTAMP|-|-|-|-|
+|user_id|INT|FOREIGN|-|-|-|
+
