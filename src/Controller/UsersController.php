@@ -6,6 +6,8 @@ use Cake\Event\Event;
 
 class UsersController extends AppController
 {
+    public $components = ['Twitter'];
+
     public function beforeFilter(Event $event){
         parent::beforeFilter($event);
         $this->Auth->allow(['login','signup']);
@@ -23,8 +25,9 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
+        $twitter_login = $this->Twitter->isAuthorized();
 
-        $this->set('user', $user);
+        $this->set(compact('user', 'twitter_login'));
     }
 
     public function signup()

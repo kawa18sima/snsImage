@@ -7,30 +7,33 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('ユーザ編集'), ['action' => 'edit', $user->id]) ?> </li>
     </ul>
 </nav>
 <div class="users view large-9 medium-8 columns content">
     <h3><?= h($user->name) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Name') ?></th>
+            <th scope="row"><?= __('名前') ?></th>
             <td><?= h($user->name) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Email') ?></th>
+            <th scope="row"><?= __('メールアドレス') ?></th>
             <td><?= h($user->email) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Password') ?></th>
+            <th scope="row"><?= __('パスワード') ?></th>
             <td><?= h($user->password) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($user->id) ?></td>
+            <th scope="row"><?= __('ツイッター認証') ?></th>
+            <td>
+                <?php if(!$twitter_login): ?>
+                    <?= $this->Html->link(__('ツイッターでログインする'), ['controller' => 'twitter' ,'action' => 'login']) ?>
+                <?php else: ?>
+                    <?= $this->Html->link(__('認証を解除する'), ['controller' => 'twitter' ,'action' => 'logout']) ?>
+                <?php endif ?>
+            </td>
         </tr>
     </table>
 </div>
