@@ -10,10 +10,11 @@ class TwitterComponent extends Component {
     /** 
      * TWITTER_CK -> Consumer API keys
      * TWITTER_CS -> Consumer API secret key
+     * CALLBACK_URL 
     */
     const TWITTER_CK = '';
     const TWITTER_CS = '';
-    const CALLBACK_URL = 'https://d1wlktsquz20pl.cloudfront.net/twitter/collback';
+    const CALLBACK_URL = '';
 
     public function initialize(array $config) {
         $this->controller = $this->_registry->getController();
