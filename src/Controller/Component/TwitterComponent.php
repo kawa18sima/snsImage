@@ -10,10 +10,14 @@ class TwitterComponent extends Component {
     /** 
      * TWITTER_CK -> Consumer API keys
      * TWITTER_CS -> Consumer API secret key
+     * TWITTER_AK -> Access token
+     * TWITTER_AS -> access token secret
      * CALLBACK_URL 
     */
     const TWITTER_CK = '';
     const TWITTER_CS = '';
+    const TWITTER_AK = '';
+    const TWITTER_AS = '';
     const CALLBACK_URL = '';
 
     public function initialize(array $config) {
@@ -187,5 +191,24 @@ class TwitterComponent extends Component {
         $this->session->delete('Twitter.oauth_token');
         $this->session->delete('Twitter.access_token');
         $this->session->delete('Twitter.user_id');
+    }
+
+    public function getTimeLineImages(){
+        $connection = new TwitterOAuth(self::TWITTER_CK, self::TWITTER_CS, self::TWITTER_AK, self::TWITTER_AS);
+        $user_params = ['count' => '200'];
+        $timeLine = $connection->get('statuses/user_timeline', $user_params);
+        $result = json_decode(json_encode($timeLine), true);
+        $images = [];
+        print_r($result);
+        foreach($result as $ele){
+            $time = $ele->created_at;
+            foreach((array)$ele->extended_entities->media as $vaelu_media){
+                if($vaelu_media->type == 'photo'){
+                    $images[$vaelu_media->media_url] = $time;
+                }
+            }
+            
+        }
+        return $images;
     }
 }
