@@ -1,45 +1,20 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Image[]|\Cake\Collection\CollectionInterface $images
- */
-?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Image'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+        <li><?= $this->Form->postLink(__('写真の同期'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('ユーザー編集'), ['controller' => 'users' ,'action' => 'view']) ?></li>
     </ul>
 </nav>
+<?php if(!isset($images)): ?>
 <div class="images index large-9 medium-8 columns content">
-    <h3><?= __('Images') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('image_src') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('upload_time') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($images as $image): ?>
-            <tr>
-                <td><?= $this->Number->format($image->id) ?></td>
-                <td><?= h($image->image_src) ?></td>
-                <td><?= h($image->upload_time) ?></td>
-                <td><?= $image->has('user') ? $this->Html->link($image->user->name, ['controller' => 'Users', 'action' => 'view', $image->user->id]) : '' ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $image->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $image->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $image->id], ['confirm' => __('Are you sure you want to delete # {0}?', $image->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <h3><?= __('写真一覧') ?></h3>
+    <div id="aniimated-thumbnials">
+        <?php foreach ($images as $image): ?>
+            <a href="<?= $image->image_src?>">
+                <img src="<?= $image->image_src ?>">
+            </a>
+        <?php endforeach; ?>
+    </div>
+    
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
@@ -51,3 +26,6 @@
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
 </div>
+<?php else: ?>
+    <h1>まだ写真がありません</h1>
+<?php endif ?>
