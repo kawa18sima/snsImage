@@ -1,4 +1,4 @@
-<?php if(!isset($images)): ?>
+<?php if(count($images)>0): ?>
 <div class="images index large-9 medium-8 columns content">
     <h3><?= __('写真一覧') ?></h3>
     <div id="aniimated-thumbnials">
@@ -8,7 +8,7 @@
             </a>
         <?php endforeach; ?>
     </div>
-    
+
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
@@ -23,3 +23,4 @@
 <?php else: ?>
     <h1>まだ写真がありません</h1>
 <?php endif ?>
+

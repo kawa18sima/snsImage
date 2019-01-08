@@ -26,19 +26,26 @@ class ImagesController extends AppController
 
     public function add()
     {
+        $this->autoRender = false;
         if ($this->request->is('post')) {
             $user = $this->Auth->user();
             $images = $this->Twitter->getTimeLineImages();
             foreach($images as $url => $time){
-                $image = $this->Images->newEntity([
+                $time = new Time($time);
+                $time->timezone = 'Asia/Tokyo';
+                $time->i18nFormat('yyyy-MM-dd HH:mm:ss');
+                $data = [
                     'image_src' => $url,
-                    'created' => new DateTime($time),
-                    'user_id' => $user->id
-                ]);
-                $this->Images->save($image);
+                    'upload_time' => $time,
+                    'user_id' => $user['id']
+                ];
+                $image = $this->Images->newEntity($data);
+                if($this->Images->find('all', $data)->first() == null){
+                   $this->Images->save($image);
+               }
             }
         }
-        return $this->redirect(['aciton' => 'index']);
-        
+        return $this->redirect(['action' => 'index']);
     }
+
 }

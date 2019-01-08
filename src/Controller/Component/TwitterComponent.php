@@ -195,19 +195,19 @@ class TwitterComponent extends Component {
 
     public function getTimeLineImages(){
         $connection = new TwitterOAuth(self::TWITTER_CK, self::TWITTER_CS, self::TWITTER_AK, self::TWITTER_AS);
-        $user_params = ['count' => '200'];
+        $user_params = ['count' => '100'];
         $timeLine = $connection->get('statuses/user_timeline', $user_params);
         $result = json_decode(json_encode($timeLine), true);
         $images = [];
-        print_r($result);
         foreach($result as $ele){
-            $time = $ele->created_at;
-            foreach((array)$ele->extended_entities->media as $vaelu_media){
-                if($vaelu_media->type == 'photo'){
-                    $images[$vaelu_media->media_url] = $time;
+            if(isset($ele['entities']['media'])){
+            $time = $ele['created_at'];
+            foreach($ele['entities']['media'] as $vaelu_media){
+                if($vaelu_media['type'] == 'photo'){
+                    $images[$vaelu_media['media_url_https']] = $time;
                 }
             }
-            
+            }
         }
         return $images;
     }
