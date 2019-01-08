@@ -1,9 +1,3 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li><?= $this->Form->postLink(__('写真の同期'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('ユーザー編集'), ['controller' => 'users' ,'action' => 'view']) ?></li>
-    </ul>
-</nav>
 <?php if(!isset($images)): ?>
 <div class="images index large-9 medium-8 columns content">
     <h3><?= __('写真一覧') ?></h3>

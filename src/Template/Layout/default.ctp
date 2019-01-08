@@ -54,6 +54,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </nav>
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
+        <?php if(isset($login_user)): ?>
+            <?= $this->element('navigation',['user' => $login_user]) ?>
+        <?php endif ?>
         <?= $this->fetch('content') ?>
     </div>
     <footer>
