@@ -13,13 +13,6 @@ class UsersController extends AppController
         $this->Auth->allow(['login','signup']);
     }
 
-    public function index()
-    {
-        $users = $this->paginate($this->Users);
-
-        $this->set(compact('users'));
-    }
-
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
