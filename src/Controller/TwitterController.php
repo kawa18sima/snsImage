@@ -11,19 +11,18 @@ class TwitterController extends AppController
 
     public function beforeFilter(Event $event){
         $this->autoRender = false;
-        $this->loadModel('SnsAcount');
-        $current_user = $this->Auth->user();
+        $this->loadModel('SnsAcounts');
     }
     
     public function callback(){
         
         if($this->Twitter->initializeOnCallback()){
-            $acount = $this->SnsAcount->newEntity([
+            $acount = $this->SnsAcounts->newEntity([
                 'acount_id' => $this->Twitter->getUserId(),
                 'sns' => 'twitter',
-                'user_id' => $current_user['id']
+                'user_id' => $this->Auth->user()['id']
             ]);
-            $this->SnsAcount->save($acount);
+            $this->SnsAcounts->save($acount);
             $this->Flash->success(__('認証に成功しました。'));
         }else{
             $this->Flash->error(__('認証に失敗しました。'));
@@ -33,7 +32,7 @@ class TwitterController extends AppController
 
     public function login(){
         if ($this->request->is('get')){
-            if($this->SnsAcount->find()->where(['user_id' => $current_user['id'], 'sns' => 'twitter'])->count() > 0){
+            if($this->SnsAcounts->find()->where(['user_id' => $this->Auth->user()['id'], 'sns' => 'twitter'])->count() > 0){
                 $this->Flash->error(__('すでにログインしています。'));
                 return $this->redirect(['controller' => 'images', 'action' => 'index']);
             }else{
