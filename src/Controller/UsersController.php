@@ -15,10 +15,11 @@ class UsersController extends AppController
 
     public function view($id = null)
     {
+        $this->loadModel('SnsAcounts');
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
-        $twitter_login = $this->Twitter->isAuthorized();
+        $twitter_login = $this->SnsAcounts->find()->where(['user_id' => $id])->first();
 
         $this->set(compact('user', 'twitter_login'));
     }
