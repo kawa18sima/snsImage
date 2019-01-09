@@ -16,13 +16,10 @@
             <td><?= h($user->email) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('パスワード') ?></th>
-            <td><?= h($user->password) ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('ツイッター認証') ?></th>
             <td>
-                <?php if(!$twitter_login): ?>
+                
+                <?php if(empty($twitter_login)): ?>
                     <?= $this->Html->link(__('ツイッターでログインする'), ['controller' => 'twitter' ,'action' => 'login']) ?>
                 <?php else: ?>
                     <h5>認証されています</h5>
