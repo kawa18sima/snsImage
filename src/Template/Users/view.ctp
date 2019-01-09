@@ -4,12 +4,6 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('ユーザ編集'), ['action' => 'edit', $user->id]) ?> </li>
-    </ul>
-</nav>
 <div class="users view large-9 medium-8 columns content">
     <h3><?= h($user->name) ?></h3>
     <table class="vertical-table">

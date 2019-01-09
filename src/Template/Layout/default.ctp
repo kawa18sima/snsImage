@@ -28,12 +28,24 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('style.css') ?>
+    <?= $this->Html->css('image.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+    
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.3.5/js/lightgallery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.3.5/css/lightgallery.css" />
 </head>
 <body>
+    <script>
+        $(function () {
+            $('#aniimated-thumbnials').lightGallery({
+                thumbnail:true
+            });
+        });
+    </script>
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
@@ -54,6 +66,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </nav>
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
+        <?php if(isset($login_user)): ?>
+            <?= $this->element('navigation',['user' => $login_user]) ?>
+        <?php endif ?>
         <?= $this->fetch('content') ?>
     </div>
     <footer>
