@@ -78,6 +78,7 @@ class UsersController extends AppController
 
     public function logout(){
         $this->Flash->success(__('ログアウトしました。'));
+        $this->Twitter->clearSessionData();
         return $this->redirect($this->Auth->logout());
     }
 }
