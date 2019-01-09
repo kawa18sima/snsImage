@@ -49,8 +49,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-            </li>
+            <?= $this->Html->image('logo.png',['alt' => 'snsImage', 'width'=>'50','height'=>'50', 'url' => ['controller' => 'Images', 'action' => 'index']]) ?>
         </ul>
         
         <div class="top-bar-section">

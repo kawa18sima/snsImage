@@ -186,7 +186,7 @@ class TwitterComponent extends Component {
     /**
      * セッションに保存されているOAuth認証情報などをクリアする
      */
-    private function clearSessionData()
+    public function clearSessionData()
     {
         $this->session->delete('Twitter.oauth_token');
         $this->session->delete('Twitter.access_token');
