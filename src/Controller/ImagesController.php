@@ -17,7 +17,8 @@ class ImagesController extends AppController
 
     public function index()
     {
-        $images = $this->Images->find()->order(['upload_time' => 'DESC']);
+        $current_user = $this->Auth->user();
+        $images = $this->Images->find()->where(['user_id' => $current_user['id']])->order(['upload_time' => 'DESC']);
 
         $this->set(compact('images'));
     }
@@ -38,9 +39,7 @@ class ImagesController extends AppController
                     'user_id' => $user['id']
                 ];
                 $image = $this->Images->newEntity($data);
-                if(isset($this->Images->find('all', $data)->first()['id'])){
-                   $this->Images->save($image);
-               }
+                $this->Images->save($image);
             }
         }
         return $this->redirect(['action' => 'index']);
