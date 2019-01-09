@@ -15,6 +15,10 @@ class UsersController extends AppController
 
     public function view($id = null)
     {
+        if($id != $this->Auth->user()['id']){
+            $this->Flash->error(__('権限がありません'));
+            return $this->redirect(['controller' => 'images', 'actions' => 'index']);
+        }
         $this->loadModel('SnsAcounts');
         $user = $this->Users->get($id, [
             'contain' => []
@@ -30,7 +34,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('登録に成功しました。'));
 
                 return $this->redirect(['action' => 'login']);
             }else{
@@ -49,17 +53,21 @@ class UsersController extends AppController
 
     public function edit($id = null)
     {
+        if($id != $this->Auth->user()['id']){
+            $this->Flash->error(__('権限がありません'));
+            return $this->redirect(['controller' => 'images', 'actions' => 'index']);
+        }
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('変更に成功しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('変更にできませんでした。以下の内容に従い修正してください。'));
         }
         $this->set(compact('user'));
     }

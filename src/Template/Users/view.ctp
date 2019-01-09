@@ -27,4 +27,7 @@
             </td>
         </tr>
     </table>
+    <div class="row">
+        <?= $this->Html->link(__('編集'), ['action' => 'edit', $user->id]) ?>
+    </div>
 </div>
