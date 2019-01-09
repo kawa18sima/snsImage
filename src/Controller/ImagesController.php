@@ -17,10 +17,7 @@ class ImagesController extends AppController
 
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users']
-        ];
-        $images = $this->paginate($this->Images);
+        $images = $this->Images->find()->order(['upload_time' => 'DESC']);
 
         $this->set(compact('images'));
     }
