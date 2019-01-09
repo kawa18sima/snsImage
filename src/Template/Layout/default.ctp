@@ -34,8 +34,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
     
     <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="path/lightGallery/js/lightgallery.js"></script>
-    <link rel="stylesheet" href="path/lightGallery/css/lightgallery.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.3.5/js/lightgallery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.3.5/css/lightgallery.css" />
 </head>
 <body>
     <script>
