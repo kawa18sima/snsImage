@@ -68,3 +68,12 @@ custom styles.
 |upload_time|TIMESTAMP|-|-|-|-|
 |user_id|INT|FOREIGN|-|-|-|
 
+## sns_acounts table
+
+| Field|Type|Null|Key|Default|Extra|
+|:-----------:|:------------:|:------------:|:------------:|:------------:|:------------:|
+|id|INT|NO|PRIMARY|-|AUTO_INCREMENT|
+|acount_id|VARCHAR(255)|NO|-|-|-|
+|sns|VARCHAR(255)|NO|-|-|-|
+|user_id|INT|FOREIGN|-|-|-|
+
