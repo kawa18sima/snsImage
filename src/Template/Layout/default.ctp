@@ -32,8 +32,19 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+    
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="path/lightGallery/js/lightgallery.js"></script>
+    <link rel="stylesheet" href="path/lightGallery/css/lightgallery.css" />
 </head>
 <body>
+    <script>
+        $(function () {
+            $('#aniimated-thumbnials').lightGallery({
+                thumbnail:true
+            });
+        });
+    </script>
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
