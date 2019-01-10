@@ -26,9 +26,11 @@ class ImagesController extends AppController
     public function add()
     {
         $this->autoRender = false;
+        $this->loadModel('SnsAcounts');
+        $sns = $this->SnsAcounts->find()->where(['user_id' => $this->Auth->user()['id']])->first()['acount_id'];
         if ($this->request->is('post')) {
             $user = $this->Auth->user();
-            $images = $this->Twitter->getTimeLineImages();
+            $images = $this->Twitter->getTimeLineImages($sns);
             foreach($images as $url => $time){
                 if($this->Images->find()->where([
                     'image_src' => $url,
