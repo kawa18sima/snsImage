@@ -193,10 +193,10 @@ class TwitterComponent extends Component {
         $this->session->delete('Twitter.user_id');
     }
 
-    public function getTimeLineImages(){
+    public function getTimeLineImages($user_id){
         $connection = new TwitterOAuth(self::TWITTER_CK, self::TWITTER_CS, self::TWITTER_AK, self::TWITTER_AS);
-        $user_params = ['count' => '100'];
-        $timeLine = $connection->get('statuses/user_timeline', $user_params);
+        $user_params = ['user_id' => $user_id, 'count' => '100'];
+        $timeLine = $connection->get("search/user_timeline", $user_params);
         $result = json_decode(json_encode($timeLine), true);
         $images = [];
         foreach($result as $ele){
