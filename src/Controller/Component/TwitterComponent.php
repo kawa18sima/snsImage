@@ -7,18 +7,6 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 use Cake\Network\Exception\InternalErrorException;
 
 class TwitterComponent extends Component {
-    /** 
-     * TWITTER_CK -> Consumer API keys
-     * TWITTER_CS -> Consumer API secret key
-     * TWITTER_AK -> Access token
-     * TWITTER_AS -> access token secret
-     * CALLBACK_URL 
-    */
-    const TWITTER_CK = '';
-    const TWITTER_CS = '';
-    const TWITTER_AK = '';
-    const TWITTER_AS = '';
-    const CALLBACK_URL = '';
 
     public function initialize(array $config) {
         $this->controller = $this->_registry->getController();
@@ -42,8 +30,9 @@ class TwitterComponent extends Component {
      */
     public function getAuthenticateUrl()
     {
-        $connection = new TwitterOAuth(self::TWITTER_CK, self::TWITTER_CS);
-        $request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => self::CALLBACK_URL));
+        print_r(env('TWITTER_CONSUMER_API_KEY'));
+        $connection = new TwitterOAuth(env('TWITTER_CONSUMER_API_KEY'), env('TWITTER_CONSUMER_SECRET_KEY'));
+        $request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => env('CALLBACK_URL')));
         $authenticate_url = $connection->url('oauth/authenticate', array('oauth_token' => $request_token['oauth_token']));
 
         if (!isset($request_token) || !isset($authenticate_url))
@@ -102,7 +91,7 @@ class TwitterComponent extends Component {
             throw new InternalErrorException('OAuth認証情報が存在しません');
         }
 
-        $connection = new TwitterOAuth(self::TWITTER_CK, self::TWITTER_CS, $request_token["token"], $request_token["token_secret"]);
+        $connection = new TwitterOAuth(env('TWITTER_CONSUMER_API_KEY'), env('TWITTER_CONSUMER_SECRET_KEY'), $request_token["token"], $request_token["token_secret"]);
         $access_token = $connection->oauth("oauth/access_token", ["oauth_verifier" => $oauth_verifier]);
 
         if ($connection->getLastHttpCode() != 200)
@@ -126,7 +115,7 @@ class TwitterComponent extends Component {
     {
         $access_token = $this->getAccessToken();
 
-        return new TwitterOAuth(self::TWITTER_CK, self::TWITTER_CS, $access_token["token"], $access_token["token_secret"]);
+        return new TwitterOAuth(env('TWITTER_CONSUMER_API_KEY'), env('TWITTER_CONSUMER_SECRET_KEY'), $access_token["token"], $access_token["token_secret"]);
     }
 
     /**
@@ -194,7 +183,7 @@ class TwitterComponent extends Component {
     }
 
     public function getTimeLineImages($user_id){
-        $connection = new TwitterOAuth(self::TWITTER_CK, self::TWITTER_CS, self::TWITTER_AK, self::TWITTER_AS);
+        $connection = new TwitterOAuth(env('TWITTER_CONSUMER_API_KEY'), env('TWITTER_CONSUMER_SECRET_KEY'), env('TWITTER_ACCESS_KEY'), env('TWITTER_ACCESS_SECRET_KEY'));
         $user_params = ['user_id' => $user_id, 'count' => '100'];
         $timeLine = $connection->get("search/user_timeline", $user_params);
         $result = json_decode(json_encode($timeLine), true);
