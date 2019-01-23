@@ -76,4 +76,5 @@ custom styles.
 |acount_id|VARCHAR(255)|NO|-|-|-|
 |sns|VARCHAR(255)|NO|-|-|-|
 |user_id|INT|FOREIGN|-|-|-|
+|sync|VARCHAR(255)|YES|-|-|-|
 
