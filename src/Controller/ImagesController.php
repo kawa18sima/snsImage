@@ -19,8 +19,11 @@ class ImagesController extends AppController
     {
         $current_user = $this->Auth->user();
         $images = $this->Images->find()->where(['user_id' => $current_user['id']])->order(['upload_time' => 'DESC']);
+        $this->loadModel('SnsAcounts');
+        $sns = $this->SnsAcounts->find()->where(['user_id' => $current_user['id'], 'sns' => 'twitter'])->first();
 
-        $this->set(compact('images'));
+
+        $this->set(compact('images', 'sns'));
     }
 
     public function add($sync_id)
@@ -28,10 +31,11 @@ class ImagesController extends AppController
         $this->autoRender = false;
         $this->loadModel('SnsAcounts');
         if ($this->request->is('post')) {
-            $sns = $this->SnsAcounts->find()->where(['sync' => $sync_id])->first();
-            if(isset($sns['id'])){
+            $sns = $this->SnsAcounts->find()->where(['sync' => $sync_id]);
+            if($sns->count() == 0){
                 return $this->redirect(['action' => 'index']);
             }
+            $sns = $sns->first();
             $user = $this->Auth->user();
             $images = $this->Twitter->getTimeLineImages($sns);
             foreach($images as $url => $time){
