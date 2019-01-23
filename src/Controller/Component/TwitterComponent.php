@@ -185,7 +185,7 @@ class TwitterComponent extends Component {
     public function getTimeLineImages($user_id){
         $connection = new TwitterOAuth(env('TWITTER_CONSUMER_API_KEY'), env('TWITTER_CONSUMER_SECRET_KEY'), env('TWITTER_ACCESS_KEY'), env('TWITTER_ACCESS_SECRET_KEY'));
         $user_params = ['user_id' => $user_id, 'count' => '100'];
-        $timeLine = $connection->get("search/user_timeline", $user_params);
+        $timeLine = $connection->get("statuses/user_timeline", $user_params);
         $result = json_decode(json_encode($timeLine), true);
         $images = [];
         foreach($result as $ele){
