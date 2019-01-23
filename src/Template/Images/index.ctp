@@ -1,3 +1,4 @@
+<h4><?= $this->Form->postLink(__('同期'), ['action' => 'sync']) ?></h4>
 <?php if($images->count() > 0): ?>
 <div class="images index large-9 medium-8 columns content">
     <h3><?= __('写真一覧') ?></h3>
