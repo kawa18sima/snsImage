@@ -69,7 +69,6 @@ class ImagesController extends AppController
     public function sync(){
         $this->autoRender = false;
         $this->loadModel('SnsAcounts');
-        if($this->request->is('post')){
             $current_user = $this->Auth->user();
             $sns_acounts = $this->SnsAcounts->find()->where(['user_id' => $current_user['id']]);
             foreach($sns_acounts as $sns_acount){
@@ -80,7 +79,6 @@ class ImagesController extends AppController
                     }
                 }
             }
-        }
         return $this->redirect(['action' => 'index']);
     }
 

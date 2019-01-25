@@ -1,5 +1,5 @@
 <?php if(!$sns['sync'] && isset($sns)): ?>
-    <h4><?= $this->Form->postLink(__('同期'), ['action' => 'sync']) ?></h4>
+    <h4><?=$this->Html->link('同期',['controller' => 'Images', 'action' => 'sync'])?></h4>
 <?php elseif(isset($sns)): ?>
     <h4>同期中</h4>
 <?php endif ?>
