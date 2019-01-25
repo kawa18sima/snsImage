@@ -1,6 +1,6 @@
-<?php if(!$sns['sync']): ?>
+<?php if(!$sns['sync'] && isset($sns)): ?>
     <h4><?= $this->Form->postLink(__('同期'), ['action' => 'sync']) ?></h4>
-<?php else: ?>
+<?php elseif(isset($sns)): ?>
     <h4>同期中</h4>
 <?php endif ?>
 <?php if($images->count() > 0): ?>
