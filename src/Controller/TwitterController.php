@@ -20,7 +20,8 @@ class TwitterController extends AppController
             $acount = $this->SnsAcounts->newEntity([
                 'acount_id' => $this->Twitter->getUserId(),
                 'sns' => 'twitter',
-                'user_id' => $this->Auth->user()['id']
+                'user_id' => $this->Auth->user()['id'],
+                'sync' => false
             ]);
             $this->SnsAcounts->save($acount);
             $this->Flash->success(__('認証に成功しました。'));
