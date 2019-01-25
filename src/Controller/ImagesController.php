@@ -30,18 +30,17 @@ class ImagesController extends AppController
     {
         $this->autoRender = false;
         $this->loadModel('SnsAcounts');
-        if ($this->request->is('post')) {
+        if ($this->request->is('get')) {
             $sns = $this->SnsAcounts->find()->where(['sync' => $sync_id]);
             if($sns->count() == 0){
                 return $this->redirect(['action' => 'index']);
             }
             $sns = $sns->first();
-            $user = $this->Auth->user();
             $images = $this->Twitter->getTimeLineImages($sns);
             foreach($images as $url => $time){
                 if($this->Images->find()->where([
                     'image_src' => $url,
-                    'user_id' => $user['id']
+                    'user_id' => $sns['user_id']
                 ])->count() == 0){
                     $time = new Time($time);
                     $time->timezone = 'Asia/Tokyo';
@@ -49,7 +48,7 @@ class ImagesController extends AppController
                     $image = $this->Images->newEntity([
                         'image_src' => $url,
                         'upload_time' => $time,
-                        'user_id' => $user['id']
+                        'user_id' => $sns['user_id']
                     ]);
                     $this->Images->save($image);
                 }
