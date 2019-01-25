@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\I18n\Time;
+use Cake\Event\Event;
 
 /**
  * Images Controller
@@ -14,6 +15,11 @@ use Cake\I18n\Time;
 class ImagesController extends AppController
 {
     public $components = ['Twitter'];
+
+    public function beforeFilter(Event $event){
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add']);
+    }
 
     public function index()
     {
