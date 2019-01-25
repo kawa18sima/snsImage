@@ -42,7 +42,7 @@ class ImagesController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $sns = $sns->first();
-            $images = $this->Twitter->getTimeLineImages($sns);
+            $images = $this->Twitter->getTimeLineImages($sns['acount_id']);
             foreach($images as $url => $time){
                 if($this->Images->find()->where([
                     'image_src' => $url,
