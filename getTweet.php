@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli('twitter-nakashima.ci9npugkyvqo.ap-northeast-1.rds.amazonaws.com', 'nakashima', 'XLXS5728', 'snsImage');
+$mysqli = new mysqli(getenv('SERVER_URL'), getenv('SERVER_USER'), getenv('SERVER_PASS'), getenv('SERVER_DB'));
 if ($mysqli->connect_error) {
     echo $mysqli->connect_error;
     exit();
